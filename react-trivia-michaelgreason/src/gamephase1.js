@@ -1,26 +1,33 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import Categories from './categories';
+import Play from './select-question.js'
 
-function GamePhase1(){
+
+function GamePhase1({categoryId}){
     const [question, setQuestion] = useState(null)
+    const [selectQuestion, setSelectQuestion] = useState(null)
 
     useEffect(() => {
         console.log('useEffect runs')
-        // const URL = `https://opentdb.com/api_count.php?category=${trivia_categories.id}`
-        axios.get(URL).then((response) => setQuestion(response.data))
-
-    }, [])
+        const URL = `https://opentdb.com/api.php?amount=10&category=${categoryId}`
+        axios.get(URL).then((response) => { 
+                console.log(response.data)
+             setQuestion(response.data)}) }, [])
+        
     
     return (
+        
         <>
+        
         <h3>
             Question: 
         </h3>
         <div>
-            {question && (question.results.map(result => <div>{result.question}</div>))}
+            {question && (question.results.map((result, ind) => <li key={ind}><button onClick={() => setSelectQuestion(result.question)}>{result.question}</button></li>))}
         </div>
+        {selectQuestion && <Play selectQuestion={selectQuestion} question={question}/>}
         </>
+        
     )
 }
 
