@@ -7,7 +7,8 @@ function GamePhase2({categoryId}){
     const [currentQuestion, setCurrentQuestion] = useState(0)
     let score = useRef(0)
     let question = useRef(0)
-    const answers = useRef(null)
+    const [answers, setAnswers] = useState(0)
+    let selectedAnswer = useRef(0)
 
     useEffect(() => {
         console.log('useEffect runs')
@@ -20,8 +21,8 @@ function GamePhase2({categoryId}){
             console.log(correctAnswer)
             let wrongAnswers = response.data.results[0].incorrect_answers
             console.log(wrongAnswers)
-            answers.current = [...wrongAnswers, correctAnswer]
-            console.log(answers.current)
+            setAnswers([...wrongAnswers, correctAnswer])
+            console.log(answers)
         })
             }, [])
 
@@ -47,18 +48,22 @@ function GamePhase2({categoryId}){
             //     console.log(answers.current)
                 
                 
-                function handleClick(correctAnswer) {
+                function handleClick(selectedAnswer) {
                     console.log(question.correct_answer)
-                    console.log(question.correctAnswer)
-                    if (question.correct_answer === question.correctAnswer) {
+                    console.log(selectedAnswer)                 
+                    if (question.correct_answer === selectedAnswer.target.innerText) {
                     score.current += 1
                     setCurrentQuestion(setCurrentQuestion => setCurrentQuestion+1)
+                    setAnswers(setAnswers => setAnswers+1)       
                     } else {
                         alert('wrong!') }
                 }
                 
                 if (questions) question = questions.results[currentQuestion]
                 console.log(question)
+
+                // if (questions) selectedAnswer = questions.results[answers]
+                // console.log(selectedAnswer)
                 
                 return (
                     
@@ -72,7 +77,7 @@ function GamePhase2({categoryId}){
             {questions && <div>{question.question}</div>}
         </div>
         <div>
-            {questions && answers.current.map((answer) => <li><button onClick={handleClick}>{answer}</button></li>)}
+            {questions && answers.map((selectedAnswer) => <li><button onClick={handleClick}>{selectedAnswer}</button></li>)}
         </div>
         </>
 
