@@ -2,6 +2,7 @@ import './App.css';
 import Categories from './categories.js';
 import {useState, useEffect} from 'react';
 import GamePhase1 from './gamephase1';
+import GamePhase2 from './gamephase2';
 
 
 
@@ -10,7 +11,7 @@ function App() {
 
   return (
     <div>
-    { categoryId ? <GamePhase1 categoryId={categoryId}/> : <Categories setCategoryId={setCategoryId}/>}
+    { categoryId ? <GamePhase2 categoryId={categoryId}/> : <Categories setCategoryId={setCategoryId}/>}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
+
 function Categories({setCategoryId}) {
     const [categories, setCategories] = useState(null)
 
