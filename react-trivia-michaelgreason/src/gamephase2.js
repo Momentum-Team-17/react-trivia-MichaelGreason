@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
+import he from 'he'
 
 function GamePhase2({categoryId}){
 
@@ -7,8 +8,6 @@ function GamePhase2({categoryId}){
     const [currentQuestion, setCurrentQuestion] = useState(0)
     let score = useRef(0)
     let question = useRef(0)
-    const [answers, setAnswers] = useState(0)
-    let selectedAnswer = useRef(0)
 
     useEffect(() => {
         console.log('useEffect runs')
@@ -17,12 +16,12 @@ function GamePhase2({categoryId}){
             // console.log(response.data)               
             setQuestions(response.data)
             score.current = 0
-            let correctAnswer = response.data.results[0].correct_answer
-            console.log(correctAnswer)
-            let wrongAnswers = response.data.results[0].incorrect_answers
-            console.log(wrongAnswers)
-            setAnswers([...wrongAnswers, correctAnswer])
-            console.log(answers)
+            // let correctAnswer = response.data.results[0].correct_answer
+            // console.log(correctAnswer)
+            // let wrongAnswers = response.data.results[0].incorrect_answers
+            // console.log(wrongAnswers)
+            // setAnswers([...wrongAnswers, correctAnswer])
+            // console.log(answers)
         })
             }, [])
 
@@ -53,17 +52,22 @@ function GamePhase2({categoryId}){
                     console.log(selectedAnswer)                 
                     if (question.correct_answer === selectedAnswer.target.innerText) {
                     score.current += 1
-                    setCurrentQuestion(setCurrentQuestion => setCurrentQuestion+1)
-                    setAnswers(setAnswers => setAnswers+1)       
+                    setCurrentQuestion(currentQuestion => currentQuestion+1)      
                     } else {
                         alert('wrong!') }
                 }
                 
-                if (questions) question = questions.results[currentQuestion]
-                console.log(question)
+                let answers
 
-                // if (questions) selectedAnswer = questions.results[answers]
-                // console.log(selectedAnswer)
+                if (questions) { 
+                    question = questions.results[currentQuestion] 
+                    let correctAnswer = question.correct_answer
+                    let incorrectAnswer = question.incorrect_answers
+                    answers = [...incorrectAnswer, correctAnswer]
+                }
+                
+
+               
                 
                 return (
                     
