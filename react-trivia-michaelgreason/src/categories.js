@@ -1,5 +1,12 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Card, Accordion, Button, Fade } from 'react-bootstrap';
+import { motion } from "framer-motion"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './GP2.css'
+import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
+import AccordionBody from 'react-bootstrap/esm/AccordionBody';
+
 
 
 function Categories({setCategoryId}) {
@@ -11,21 +18,41 @@ function Categories({setCategoryId}) {
         axios.get(URL).then((response) => setCategories(response.data))
     }, [])
 
+    const [open, setOpen] = useState(false);
+
     return (
         <>
+        <div className='title'>
         <h1>BRAIN TUG-OF-WAR</h1>
-        <h2>Instructions:</h2>
-        <h3>Welcome to Brain Tug-Of-War! Select a category to begin answering questions. For each correct answer selected, 
+        </div>
+        <Card className='instruction-card' style={{ width:'40rem'}}>
+            <Card.Header><h2>Instructions</h2></Card.Header>
+                <Card.Body><h3>Welcome to Brain Tug-Of-War! Select a category to begin answering questions. For each correct answer selected, 
             you will recieve 1 point added to your total score. For each incorrect answer selected, 1 point will be deducted from your total score. 
             If you accumulate +7 points, you win! If you fall down to -7 points... YOU LOSE!</h3>
-        <h3>Have fun playing Brain Tug-Of-War!</h3>
-        <h2>Choose Category</h2>
-        <div>
-            {categories && categories.trivia_categories.map((category, ind) => <li key={ind}>
-                <button onClick={() => setCategoryId(category.id)}>{category.name}</button>
-                </li>)}
+            </Card.Body>
+        <h3>Have fun playing Brain Tug-Of-War! 🤖</h3>
+        </Card>
+       <div className='start' >
+        <Button size='lg' variant="outline-primary" onClick={() => setOpen(!open)}
+        aria-controls="example-fade-text"
+        aria-expanded={open}>Start</Button>
+        </div>
+        <Fade in={open}>
+        <Accordion className='cc'>
+        <Accordion.Item eventKey="1">
+        <AccordionHeader><h2>Choose Category</h2></AccordionHeader>
+        <AccordionBody className='categories'>
+        <div className='cca'>
+            {categories && categories.trivia_categories.map((category, ind) => <span key={ind}>
+                <Button variant='outline-info' size='lg' onClick={() => setCategoryId(category.id)}>{category.name}</Button>
+                </span>)}
                 
         </div>
+        </AccordionBody>
+        </Accordion.Item>
+        </Accordion>
+        </Fade>
         </>
     )
 }

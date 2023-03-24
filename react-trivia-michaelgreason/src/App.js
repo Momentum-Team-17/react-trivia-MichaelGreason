@@ -1,8 +1,10 @@
 import './App.css';
 import Categories from './categories.js';
 import {useState, useEffect} from 'react';
-import GamePhase1 from './gamephase1';
 import GamePhase2 from './gamephase2';
+import { motion } from "framer-motion"
+import Card from 'react-bootstrap/Card';
+
 
 
 
