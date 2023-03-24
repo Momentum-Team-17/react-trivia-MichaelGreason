@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import he from 'he'
+import Categories from './categories';
 
 function GamePhase2({categoryId}){
 
@@ -11,40 +12,12 @@ function GamePhase2({categoryId}){
 
     useEffect(() => {
         console.log('useEffect runs')
-        const URL = `https://opentdb.com/api.php?amount=10&category=${categoryId}`
-        axios.get(URL).then((response) => {
-            // console.log(response.data)               
+        const URL = `https://opentdb.com/api.php?amount=50&category=${categoryId}`
+        axios.get(URL).then((response) => {           
             setQuestions(response.data)
             score.current = 0
-            // let correctAnswer = response.data.results[0].correct_answer
-            // console.log(correctAnswer)
-            // let wrongAnswers = response.data.results[0].incorrect_answers
-            // console.log(wrongAnswers)
-            // setAnswers([...wrongAnswers, correctAnswer])
-            // console.log(answers)
         })
             }, [])
-
-            // function shuffle(array) {
-            //     let currentIndex = array.length,  randomIndex;
-              
-            //     // While there remain elements to shuffle.
-            //     while (currentIndex != 0) {
-              
-            //       // Pick a remaining element.
-            //       randomIndex = Math.floor(Math.random() * currentIndex);
-            //       currentIndex--;
-              
-            //       // And swap it with the current element.
-            //       [array[currentIndex], array[randomIndex]] = [
-            //         array[randomIndex], array[currentIndex]];
-            //     }
-              
-            //     return array;
-            //   }
-
-            //   shuffle(answers.current)
-            //     console.log(answers.current)
                 
                 
                 function handleClick(selectedAnswer) {
@@ -54,29 +27,64 @@ function GamePhase2({categoryId}){
                     score.current += 1
                     setCurrentQuestion(currentQuestion => currentQuestion+1)      
                     } else {
-                        alert('wrong!') }
+                        alert('wrong!') 
+                        score.current -= 1
+                        setCurrentQuestion(currentQuestion => currentQuestion+1)
+                    }
                 }
+
+                function shuffle(answers) {
+                    let currentIndex = answers.length,  randomIndex;
+                  
+                    // While there remain elements to shuffle.
+                    while (currentIndex != 0) {
+                  
+                      // Pick a remaining element.
+                      randomIndex = Math.floor(Math.random() * currentIndex);
+                      currentIndex--;
+                  
+                      // And swap it with the current element.
+                      [answers[currentIndex], answers[randomIndex]] = [
+                        answers[randomIndex], answers[currentIndex]];
+                    }
+                  
+                    return answers;
+                  }
+
+                
+
+
                 
                 let answers
 
                 if (questions) { 
                     question = questions.results[currentQuestion] 
                     let correctAnswer = question.correct_answer
+                    console.log(correctAnswer)
                     let incorrectAnswer = question.incorrect_answers
-                    answers = [...incorrectAnswer, correctAnswer]
+                    answers = shuffle([...incorrectAnswer, correctAnswer])
+                    // console.log(answers)
+                }
+
+                if (score.current === 7) {
+                    alert('YOU WIN!')
+                    return <Categories />
+                }
+
+                if (score.current === -7) {
+                    alert('YOU LOSE!')
+                    return <Categories />
                 }
                 
-
-               
                 
                 return (
                     
                 <>
         
-                <h3>
+                <h1>
                     Question: 
-                </h3>
-                <h2>{score.current}</h2>
+                </h1>
+                <h2>Score: {score.current}</h2>
         <div>
             {questions && <div>{question.question}</div>}
         </div>
