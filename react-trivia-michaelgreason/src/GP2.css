@@ -1,3 +1,25 @@
+* {
+    font-family: 'Delicious Handrawn', cursive;
+    
+  }
+
+  .title {
+    color: #462827;
+    /* border-bottom:2px solid #462827; */
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 2%;
+  }
+.instruction-card {
+    border:2px solid #462827;
+    background-color: rgba(202, 242, 255, 0.624);
+    color:#462827;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
 .GP2-heading {
     display: flex;
     justify-content: space-evenly;
@@ -5,6 +27,27 @@
     padding-right: 10%;
 }
 
-.q-a {
+.cc {
+    width: 40rem;
+    margin: auto;
+    margin-bottom: 2%;
+    border:2px solid #462827;
+    background-color: skyblue;
+    color:#462827;
     
-} 
+}
+
+.cca {
+    text-align: center;
+    justify-content: space-between;
+}
+
+.buttons {
+    font-weight: 900;
+}
+
+.start {
+    text-align: center;
+    margin-bottom: 2%;
+    
+}

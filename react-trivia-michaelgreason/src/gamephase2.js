@@ -4,6 +4,8 @@ import he from 'he'
 import Categories from './categories';
 import './GP2.css'
 import { motion } from "framer-motion"
+import Card from 'react-bootstrap/Card';
+
 
 function GamePhase2({categoryId}){
 
