@@ -10,6 +10,7 @@
     margin-bottom: 2%;
     margin-top: 2%;
   }
+
 .instruction-card {
     border:2px solid #462827;
     background-color: rgba(202, 242, 255, 0.624);
@@ -20,12 +21,6 @@
     margin-bottom: 2%;
 }
 
-.GP2-heading {
-    display: flex;
-    justify-content: space-evenly;
-    padding-left: 10%;
-    padding-right: 10%;
-}
 
 .cc {
     width: 40rem;
@@ -50,4 +45,40 @@
     text-align: center;
     margin-bottom: 2%;
     
+}
+
+.GP2-heading {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 2%;
+    background-color: #D89A9E;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.question {
+    margin: auto;
+    text-align: center;
+    font-weight: 500;
+    width: 50%;
+    background-color: rgba(202, 242, 255, 0.624);
+}
+
+.answers {
+    width: 50%;
+    /* align-items: center; */
+    margin:auto;
+}
+
+.answer-buttons {
+    display: flex;
+    margin: auto;
+    margin-top: 2%;
+
 }

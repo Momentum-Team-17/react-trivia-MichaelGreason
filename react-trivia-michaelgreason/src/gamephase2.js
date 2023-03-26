@@ -1,10 +1,11 @@
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
+import { Card, Accordion, Button, Fade } from 'react-bootstrap';
 import he from 'he'
 import Categories from './categories';
 import './GP2.css'
 import { motion } from "framer-motion"
-import Card from 'react-bootstrap/Card';
+
 
 
 function GamePhase2({categoryId}){
@@ -34,7 +35,7 @@ function GamePhase2({categoryId}){
                     setCurrentQuestion(currentQuestion => currentQuestion+1)   
                     setRemainingQuestions(remainingQuestions => remainingQuestions-1)   
                     } else {
-                        alert(`Wrong! The correct answer was ${question.correct_answer}`) 
+                        alert(`Wrong! The correct answer was ${(he.decode(question.correct_answer))}`) 
                         score.current -= 1
                         setCurrentQuestion(currentQuestion => currentQuestion+1)
                         setRemainingQuestions(remainingQuestions => remainingQuestions-1)
@@ -92,17 +93,23 @@ function GamePhase2({categoryId}){
                 return (
                     
                 <>
+            <Card>
             <div className='GP2-heading'>
                 <h2>Score: {score.current}</h2>
                 <h2>Remaining questions: {remainingQuestions}</h2>
             </div>
+            </Card>
                 <h1>Question: </h1>
             <div className='q-a'>
+                <Card className='question'>
                 <div>
-                    {questions && <div>{(he.decode(question.question))}</div>}
+                    {questions && <h1>{(he.decode(question.question))}</h1>}
                 </div>
+                </Card>
                 <div>
-                    {questions && answers.map((selectedAnswer, ind) => <li key={ind}><button onClick={handleClick}>{(he.decode(selectedAnswer))}</button></li>)}
+                    {questions && answers.map((selectedAnswer, ind) => <span key={ind}>
+                        <Button variant="outline-primary" size='lg' className='answer-buttons' 
+                        onClick={handleClick}>{(he.decode(selectedAnswer))}</Button></span>)}
                 </div>
             </div>
         </>
