@@ -15,7 +15,7 @@ function App() {
 
   return (
     
-    <div>
+    <div className='all'>
     { categoryId ? <GamePhase2 categoryId={categoryId}/> : 
     <Categories setCategoryId={setCategoryId}/>}
     </div>

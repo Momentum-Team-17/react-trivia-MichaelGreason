@@ -23,6 +23,7 @@ function Categories({setCategoryId}) {
 
     return (
         <>
+        <div className='all'>
         <div className='title'>
         <h1>BRAIN TUG-OF-WAR</h1>
         </div>
@@ -55,6 +56,7 @@ function Categories({setCategoryId}) {
         </Accordion.Item>
         </Accordion>
         </Fade>
+        </div>
         </>
     )
 }

@@ -1,11 +1,12 @@
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
-import { Card, Accordion, Button, Fade } from 'react-bootstrap';
+import { Card, Accordion, Button, Fade, Alert } from 'react-bootstrap';
 import he from 'he'
 import Categories from './categories';
 import './GP2.css'
 import { motion } from "framer-motion"
 import { animate, stagger } from "framer-motion"
+import { render } from '@testing-library/react';
 
 
 
@@ -27,7 +28,10 @@ function GamePhase2({categoryId}){
         })
             }, [])
                 
-                
+                // function takeHome(){
+                //     return <Categories/> && <Categories/>
+                // }
+
                 function handleClick(selectedAnswer) {
                     // console.log(question.correct_answer)
                     // console.log(selectedAnswer)                 
@@ -71,20 +75,20 @@ function GamePhase2({categoryId}){
                 if (questions) { 
                     question = questions.results[currentQuestion] 
                     let correctAnswer = question.correct_answer
-                    console.log(correctAnswer)
+                    // console.log(correctAnswer)
                     let incorrectAnswer = question.incorrect_answers
                     answers = shuffle([...incorrectAnswer, correctAnswer])
                     // console.log(answers)
                 }
 
                 if (score.current === 7) {
-                    alert('SCORE = 7! YOU WIN!')
+                    alert('Score = 7, YOU WIN!')
                     return <Categories />
                 }
 
                 if (score.current === -7) {
-                    alert('SCORE = -7! YOU LOSE!')
-                    return <Categories />
+                    alert('Score = -7... YOU LOSE!')
+                    return <Categories/>
                 }
                 
                 if (remainingQuestions === 0) {
@@ -95,6 +99,7 @@ function GamePhase2({categoryId}){
                 return (
                     
                 <>
+                <div className='all'>
             <Card>
             <div className='GP2-heading'>
                 <h2>Score: {score.current}</h2>
@@ -113,6 +118,7 @@ function GamePhase2({categoryId}){
                         <Button variant="outline-primary" size='lg' className='answer-buttons' 
                         onClick={handleClick}>{(he.decode(selectedAnswer))}</Button></span>)}
                 </div>
+            </div>
             </div>
         </>
 
