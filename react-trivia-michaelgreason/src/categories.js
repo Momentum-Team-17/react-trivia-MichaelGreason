@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './GP2.css'
 import AccordionHeader from 'react-bootstrap/esm/AccordionHeader';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
+import { animate, stagger } from "framer-motion"
 
 
 
@@ -27,7 +28,7 @@ function Categories({setCategoryId}) {
         </div>
         <Card className='instruction-card' style={{ width:'40rem'}}>
             <Card.Header><h2>Instructions</h2></Card.Header>
-                <Card.Body><h3>Welcome to Brain Tug-Of-War! Select a category to begin answering questions. For each correct answer selected, 
+                <Card.Body><h3>Welcome to Brain Tug-Of-War! Select a category <br></br>to begin answering questions. For each correct answer selected, 
             you will recieve 1 point added to your total score. For each incorrect answer selected, 1 point will be deducted from your total score. 
             If you accumulate +7 points, you win! If you fall down to -7 points... YOU LOSE!</h3>
             </Card.Body>
@@ -44,10 +45,11 @@ function Categories({setCategoryId}) {
         <AccordionHeader><h2>Choose Category</h2></AccordionHeader>
         <AccordionBody className='categories'>
         <div className='cca'>
+            {/* <motion.div animate={{stagger}}> */}
             {categories && categories.trivia_categories.map((category, ind) => <span key={ind}>
                 <Button variant='outline-info' size='lg' onClick={() => setCategoryId(category.id)}>{category.name}</Button>
                 </span>)}
-                
+                {/* </motion.div> */}
         </div>
         </AccordionBody>
         </Accordion.Item>

@@ -3,6 +3,10 @@
     
   }
 
+  body {
+    background-color: rgb(222, 212, 212)
+  }
+
   .title {
     color: #462827;
     /* border-bottom:2px solid #462827; */

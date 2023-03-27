@@ -5,6 +5,7 @@ import he from 'he'
 import Categories from './categories';
 import './GP2.css'
 import { motion } from "framer-motion"
+import { animate, stagger } from "framer-motion"
 
 
 
@@ -35,7 +36,8 @@ function GamePhase2({categoryId}){
                     setCurrentQuestion(currentQuestion => currentQuestion+1)   
                     setRemainingQuestions(remainingQuestions => remainingQuestions-1)   
                     } else {
-                        alert(`Wrong! The correct answer was ${(he.decode(question.correct_answer))}`) 
+
+                        // alert(`Wrong! The correct answer was ${(he.decode(question.correct_answer))}`) 
                         score.current -= 1
                         setCurrentQuestion(currentQuestion => currentQuestion+1)
                         setRemainingQuestions(remainingQuestions => remainingQuestions-1)
